@@ -5,6 +5,7 @@ export enum MessageType {
   Update_Room = "update_room",
   Update_Winners = "update_winners",
   Create_Room = "create_room",
+  Add_User_To_Room = "add_user_to_room",
 }
 
 export interface PlayerData {
