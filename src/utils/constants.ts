@@ -2,6 +2,7 @@ export enum MessageType {
   Registration = "reg",
   Update_Room = "update_room",
   Update_Winners = "update_winners",
+  Create_Room = "create_room",
 }
 
 export interface PlayerData {
@@ -32,4 +33,11 @@ export interface Database {
   players: Player[];
   rooms: Room[];
   winners: Winner[];
+  connections: Connection[];
+}
+
+export interface Connection {
+  playerIndex: number | string;
+  connectionId: string;
+  wsConnection: any;
 }

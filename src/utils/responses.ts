@@ -1,5 +1,12 @@
 import { WebSocketServer } from "ws";
-import { MessageType, Player, PlayerData, Room, Winner } from "./constants";
+import {
+  Connection,
+  MessageType,
+  Player,
+  PlayerData,
+  Room,
+  Winner,
+} from "./constants";
 
 export const sendReg = (ws: any, player: Player) => {
   const message = {
@@ -77,4 +84,13 @@ export const sendUpdateWinners = (ws: any, winnersBase: Winner[]) => {
   );
 
   console.log(message.type, message);
+};
+
+export const sendUpdateRoomToAll = (
+  wsConnections: Connection[],
+  roomsBase: Room[]
+) => {
+  wsConnections.forEach(({ wsConnection }) => {
+    sendUpdateRoom(wsConnection, roomsBase);
+  });
 };
