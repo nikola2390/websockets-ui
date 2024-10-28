@@ -2,6 +2,7 @@ import { WebSocketServer } from "ws";
 import { messageHandler } from "../controller/messageHandler";
 
 import { Database, CustomWebSocket } from "../utils/constants";
+import { httpServer } from "../http_server";
 
 const WS_PORT = 3000;
 const base: Database = {
@@ -30,4 +31,13 @@ wsServer.on("connection", (ws: CustomWebSocket) => {
     );
     console.log(`Disconnected ${ws.connectionId}`);
   });
+});
+
+process.on("SIGINT", () => {
+  wsServer.close();
+  httpServer.close();
+});
+
+wsServer.on("close", () => {
+  console.log("WebSocketServer closed");
 });
