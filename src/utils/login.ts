@@ -1,9 +1,10 @@
-import { checkIsNewPlayer } from "./helpers";
+import { checkIsNewPlayer, checkIsPlayerOnline } from "./helpers";
 import {
   sendReg,
   sendWrongPassword,
   sendUpdateRoom,
   sendUpdateWinners,
+  sendPlayerOnline,
 } from "./responses";
 import {
   PlayerData,
@@ -42,7 +43,11 @@ export const login = (
       (item: Player) => item.name === playerData.name
     );
 
-    if (playerData.password === player!.password) {
+    const isPlayerOnline = checkIsPlayerOnline(player!, base.connections);
+
+    if (isPlayerOnline) {
+      sendPlayerOnline(ws, playerData);
+    } else if (playerData.password === player!.password) {
       const newConnection: Connection = {
         playerIndex: player!.index,
         connectionId: ws.connectionId,

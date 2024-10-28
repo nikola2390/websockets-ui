@@ -97,3 +97,25 @@ export const sendUpdateRoomToAll = (
     sendUpdateRoom(wsConnection, roomsBase);
   });
 };
+
+export const sendPlayerOnline = (ws: CustomWebSocket, player: PlayerData) => {
+  const message = {
+    type: MessageType.Registration,
+    data: {
+      name: player.name,
+      index: undefined,
+      error: true,
+      errorText: "Player is online",
+    },
+    id: 0,
+  };
+  ws.send(
+    JSON.stringify({
+      type: message.type,
+      data: JSON.stringify(message.data),
+      id: message.id,
+    })
+  );
+
+  console.log(message.type, message.data);
+};
