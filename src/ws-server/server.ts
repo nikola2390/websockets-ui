@@ -1,7 +1,7 @@
 import { WebSocketServer } from "ws";
 import { messageHandler } from "../controller/messageHandler";
 
-import { Database } from "../utils/constants";
+import { Database, CustomWebSocket } from "../utils/constants";
 
 const WS_PORT = 3000;
 const base: Database = {
@@ -14,7 +14,7 @@ const base: Database = {
 export const wsServer = new WebSocketServer({ port: WS_PORT });
 console.log(`Start websocket server on the ${WS_PORT} port!`);
 
-wsServer.on("connection", (ws: any) => {
+wsServer.on("connection", (ws: CustomWebSocket) => {
   ws.connectionId = crypto.randomUUID();
   console.log(`Connected ${ws.connectionId}`);
 

@@ -5,10 +5,19 @@ import {
   sendUpdateRoom,
   sendUpdateWinners,
 } from "./responses";
-import { PlayerData, Player, Database, Connection } from "./constants";
-import { WebSocketServer } from "ws";
+import {
+  PlayerData,
+  Player,
+  Database,
+  Connection,
+  CustomWebSocket,
+} from "./constants";
 
-export const login = (ws: any, playerData: PlayerData, base: Database) => {
+export const login = (
+  ws: CustomWebSocket,
+  playerData: PlayerData,
+  base: Database
+) => {
   const isNewPlayer: boolean = checkIsNewPlayer(playerData, base.players);
   if (isNewPlayer) {
     const newPlayerIndex = crypto.randomUUID();

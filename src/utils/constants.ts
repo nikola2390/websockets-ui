@@ -1,3 +1,5 @@
+import { WebSocket } from "ws";
+
 export enum MessageType {
   Registration = "reg",
   Update_Room = "update_room",
@@ -40,4 +42,8 @@ export interface Connection {
   playerIndex: number | string;
   connectionId: string;
   wsConnection: any;
+}
+
+export interface CustomWebSocket extends WebSocket {
+  connectionId: string;
 }

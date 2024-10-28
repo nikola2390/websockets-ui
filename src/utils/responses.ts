@@ -1,6 +1,6 @@
-import { WebSocketServer } from "ws";
 import {
   Connection,
+  CustomWebSocket,
   MessageType,
   Player,
   PlayerData,
@@ -8,7 +8,7 @@ import {
   Winner,
 } from "./constants";
 
-export const sendReg = (ws: any, player: Player) => {
+export const sendReg = (ws: CustomWebSocket, player: Player) => {
   const message = {
     type: MessageType.Registration,
     data: {
@@ -30,7 +30,7 @@ export const sendReg = (ws: any, player: Player) => {
   console.log(message.type, message.data);
 };
 
-export const sendWrongPassword = (ws: any, player: PlayerData) => {
+export const sendWrongPassword = (ws: CustomWebSocket, player: PlayerData) => {
   const message = {
     type: MessageType.Registration,
     data: {
@@ -52,7 +52,7 @@ export const sendWrongPassword = (ws: any, player: PlayerData) => {
   console.log(message.type, message.data);
 };
 
-export const sendUpdateRoom = (ws: any, roomsBase: Room[]) => {
+export const sendUpdateRoom = (ws: CustomWebSocket, roomsBase: Room[]) => {
   const message = {
     type: MessageType.Update_Room,
     data: roomsBase,
@@ -69,7 +69,10 @@ export const sendUpdateRoom = (ws: any, roomsBase: Room[]) => {
   console.log(message.type, message);
 };
 
-export const sendUpdateWinners = (ws: any, winnersBase: Winner[]) => {
+export const sendUpdateWinners = (
+  ws: CustomWebSocket,
+  winnersBase: Winner[]
+) => {
   const message = {
     type: MessageType.Update_Winners,
     data: winnersBase,

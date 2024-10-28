@@ -1,6 +1,6 @@
-import { Database, Room } from "./constants";
+import { CustomWebSocket, Database, Room } from "./constants";
 
-export const createRoom = (ws: any, base: Database) => {
+export const createRoom = (ws: CustomWebSocket, base: Database) => {
   const userConnection = base.connections.find(
     (connection) => connection.connectionId === ws.connectionId
   );
