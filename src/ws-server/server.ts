@@ -23,4 +23,8 @@ wsServer.on("connection", (ws: CustomWebSocket) => {
   });
 
   ws.on("error", console.error);
+
+  ws.on("close", () => {
+    console.log(`Disconnected ${ws.connectionId}`);
+  });
 });
