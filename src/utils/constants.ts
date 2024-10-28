@@ -7,6 +7,8 @@ export enum MessageType {
   Create_Room = "create_room",
   Add_User_To_Room = "add_user_to_room",
   Create_Game = "create_game",
+  Add_Ships = "add_ships",
+  Start_Game = "start_game",
 }
 
 export interface PlayerData {
@@ -38,6 +40,7 @@ export interface Database {
   rooms: Room[];
   winners: Winner[];
   connections: Connection[];
+  games: Game[];
 }
 
 export interface Connection {
@@ -48,4 +51,25 @@ export interface Connection {
 
 export interface CustomWebSocket extends WebSocket {
   connectionId: string;
+}
+
+export interface Game {
+  gameId: string;
+  gamers: Gamer[];
+}
+
+export interface Gamer {
+  indexPlayer: string | number;
+  ships: Ship[];
+  isAddedShips: boolean;
+}
+
+export interface Ship {
+  position: {
+    x: number;
+    y: number;
+  };
+  direction: boolean;
+  length: number;
+  type: "small" | "medium" | "large" | "huge";
 }

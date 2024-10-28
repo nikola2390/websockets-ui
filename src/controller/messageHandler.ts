@@ -2,7 +2,12 @@ import { login } from "../utils/login";
 import { MessageType, Database, CustomWebSocket } from "../utils/constants";
 import { sendUpdateRoomToAll } from "../utils/responses";
 import { createRoom } from "../utils/room";
-import { createGame } from "../utils/game";
+import {
+  addShips,
+  checkIsGameReady,
+  createGame,
+  sendStartGameToGamers,
+} from "../utils/game";
 
 export const messageHandler = (
   message: string,
@@ -28,6 +33,20 @@ export const messageHandler = (
       createGame(indexRoom, base, ws);
       sendUpdateRoomToAll(base.connections, base.rooms);
       break;
+    case MessageType.Add_Ships:
+      const { indexPlayer, ships } = JSON.parse(data);
+      addShips(indexPlayer, ships, base);
+
+      const game = base.games.find((game) => {
+        return game.gamers.find((gamer) => gamer.indexPlayer === indexPlayer);
+      })!;
+
+      const isGameReady = checkIsGameReady(game);
+
+      if (isGameReady) {
+        sendStartGameToGamers(game, base);
+      }
+
     default:
       break;
   }

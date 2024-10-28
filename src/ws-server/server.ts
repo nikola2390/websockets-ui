@@ -10,6 +10,7 @@ const base: Database = {
   rooms: [],
   winners: [],
   connections: [],
+  games: [],
 };
 
 export const wsServer = new WebSocketServer({ port: WS_PORT });
