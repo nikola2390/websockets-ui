@@ -27,5 +27,4 @@ export const addToRoom = (
   const room = base.rooms.find((room) => room.roomId === indexRoom);
 
   room!.roomUsers.push(user!);
-  base.rooms = base.rooms.filter((room) => room.roomId !== indexRoom);
 };

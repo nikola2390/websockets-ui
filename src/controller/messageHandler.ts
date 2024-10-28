@@ -1,7 +1,8 @@
 import { login } from "../utils/login";
 import { MessageType, Database, CustomWebSocket } from "../utils/constants";
 import { sendUpdateRoomToAll } from "../utils/responses";
-import { addToRoom, createRoom } from "../utils/room";
+import { createRoom } from "../utils/room";
+import { createGame } from "../utils/game";
 
 export const messageHandler = (
   message: string,
@@ -24,7 +25,7 @@ export const messageHandler = (
     case MessageType.Add_User_To_Room:
       const { indexRoom } = JSON.parse(data);
 
-      addToRoom(indexRoom, base, ws);
+      createGame(indexRoom, base, ws);
       sendUpdateRoomToAll(base.connections, base.rooms);
       break;
     default:
