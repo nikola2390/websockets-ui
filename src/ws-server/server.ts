@@ -21,4 +21,6 @@ wsServer.on("connection", (ws: CustomWebSocket) => {
   ws.on("message", (message: string) => {
     messageHandler(message, ws, base);
   });
+
+  ws.on("error", console.error);
 });
